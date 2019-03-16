@@ -1,0 +1,25 @@
+language: php
+sudo: false
+dist: trusty
+
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
+php:
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+  - 7.3
+  - nightly
+
+matrix:
+  allow_failures:
+    - php: nightly
+
+install:
+  - travis_retry composer run-script install-dev-deps
+
+script: ./vendor/bin/phpunit --debug --testdox
